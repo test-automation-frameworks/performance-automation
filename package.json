@@ -1,0 +1,18 @@
+{
+	"name": "performance-automation",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"test": "k6 run tests/clientRegistration/client_registration.stress.test.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"description": "",
+	"devDependencies": {
+		"@types/k6": "^0.54.1",
+		"k6": "^0.0.0"
+	},
+	"dependencies": {
+		"k6-html-reporter": "^1.0.5"
+	}
+}

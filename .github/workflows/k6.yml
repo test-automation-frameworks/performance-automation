@@ -1,0 +1,33 @@
+name: Run k6 Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_name:
+        description: 'Path of the k6 test file to run'
+        required: true
+        default: 'tests/clientLogin/client_login.load.test.js'
+
+jobs:
+  k6-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Run k6 Test
+        env:
+          TEST_NAME: ${{ github.event.inputs.test_name }}
+        run: |
+          k6 run $TEST_NAME
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@4
+        with:
+          name: k6-report
+          path: reports/performance.test.html
